@@ -27,3 +27,19 @@ void nullifyIntArr(int arr[], int size){
         arr[i] = 0;
     }
 }
+
+
+int hasCollision(int arr[], int location, int debug) {
+
+    if (arr[location] == 0) {
+        return 0;
+    } else {
+
+        if (debug) {
+            printf("Collision at arr[%d]!\n\n", location);
+        }
+
+        return 1;
+    }
+
+}

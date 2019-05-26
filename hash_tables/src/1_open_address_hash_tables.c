@@ -3,12 +3,11 @@
 #include "functions.h"
 
 
-int DEBUG = 0;
+int DEBUG = 1;
 
 int SIZE = 17;
 
 int baseArr[8] = {36, 53, 70, 87, 54, 37, 71, 40};
-
 
 int h1(int k, int arrSize) {
     return k % arrSize;
@@ -22,21 +21,6 @@ int step(int k, int arraySize) {
     return k % arraySize + 1;
 }
 
-int hasCollision(int location, int arr[]) {
-
-    if (arr[location] == 0) {
-        return 0;
-    } else {
-
-        if (DEBUG) {
-            printf("Collision at arr[%d].\n\n", location);
-        }
-
-        return 1;
-    }
-
-}
-
 int applyStep(int loc, int arr[], int size) {
 
     if (DEBUG) {
@@ -46,7 +30,7 @@ int applyStep(int loc, int arr[], int size) {
 
     loc = step(loc, size);
 
-    if (hasCollision(loc, arr)) {
+    if (hasCollision(arr, loc, DEBUG)) {
         loc = applyStep(loc, arr, size);
     }
 
@@ -68,7 +52,7 @@ int openAddressGetPosition(int k, int arr[]) {
     }
 
 
-    if (hasCollision(loc, arr)) {
+    if (hasCollision(arr, loc, DEBUG)) {
         if (DEBUG) {
             printf("Found existing item for k(%d) at openAddArr[%d]\n\n", k, loc);
         }

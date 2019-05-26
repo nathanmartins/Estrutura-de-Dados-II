@@ -93,10 +93,17 @@ void applyOpenAddressHash() {
 
     }
 
-    printf("Open Address: ");
+    printf("Processed Open Address: ");
     printIntArr(openAddArr, 17);
 
 
+}
+
+void applyLinkingHash(){
+
+
+    printf("Processed Linked: ");
+    printIntArr(linkingArr, 5);
 }
 
 
@@ -104,13 +111,22 @@ int main(int argc, char const *argv[]) {
 
 
     nullifyArrays();
-    printf("Open Address: ");
+
+    printf("\n\n=======================================================================\n");
+    printf("Open Address:           ");
     printIntArr(openAddArr, 17);
     applyOpenAddressHash();
+    printf("======================================================================= \n\n\n");
 
 
-    printf("\n\nChange DEBUG=1 to view more complete readout...\n");
+    printf("=======================================================================\n");
+    printf("Linked: ");
+    printIntArr(linkingArr, 5);
+    applyLinkingHash();
+    printf("=======================================================================\n\n\n");
 
+
+    printf("\n\nChange DEBUG=1 to view more complete readout...\n\n");
 
     return 0;
 }

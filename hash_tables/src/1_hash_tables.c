@@ -2,19 +2,18 @@
 #include <stdio.h>
 #include "functions.h"
 
-int main(int argc, char const *argv[])
-{
-
-	
-	int arr[10];
+int main(int argc, char const *argv[]) {
 
 
-	for (int i = 0; i < 10; ++i)
-	{
-		arr[i] = i;
-	}
-	printIntArr(arr, 10);
+    int openAddArr[17];
 
 
-	return 0;
+    for (int i = 0; i < 17; ++i) {
+        openAddArr[i] = i;
+    }
+
+    printIntArr(openAddArr, 17);
+
+
+    return 0;
 }

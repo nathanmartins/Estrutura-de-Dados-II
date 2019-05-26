@@ -5,4 +5,3 @@
 
 void printIntArr(int arr[], int size);
 
-

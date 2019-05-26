@@ -3,7 +3,7 @@
 #include "functions.h"
 
 
-int DEBUG = 1;
+int DEBUG = 0;
 
 int SIZE = 17;
 

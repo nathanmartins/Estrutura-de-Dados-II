@@ -123,11 +123,11 @@ int main(int argc, char const *argv[]) {
 
     nullifyArrays();
 
-    printf("\n\n=======================================================================\n");
-    printf("Open Address:           ");
-    printIntArr(openAddArr, 17);
-    openAddressHashInsertAll();
-    printf("======================================================================= \n\n\n");
+//    printf("\n\n=======================================================================\n");
+//    printf("Open Address:           ");
+//    printIntArr(openAddArr, 17);
+//    openAddressHashInsertAll();
+//    printf("======================================================================= \n\n\n");
 
 
 //    printf("=======================================================================\n");

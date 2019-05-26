@@ -17,3 +17,13 @@ void printIntArr(int arr[], int size) {
     printf("%d ", arr[index]);
   }
   printf("\n");}
+
+
+void nullifyIntArr(int arr[], int size){
+
+    // Nullifying addresses
+
+    for (int i = 0; i < size; ++i) {
+        arr[i] = 0;
+    }
+}

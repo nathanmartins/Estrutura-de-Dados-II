@@ -5,8 +5,6 @@
 
 void printIntArr(int arr[], int size);
 
-typedef struct hash Hash;
+void nullifyIntArr(int arr[], int size);
 
-Hash* createHash(int TABLE_SIZE);
-void freeHash(Hash* ha);
 

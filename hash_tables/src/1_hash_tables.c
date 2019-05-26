@@ -39,6 +39,11 @@ int hasCollision(int location, int arr[]) {
     if (arr[location] == 0) {
         return 0;
     } else {
+
+        if (DEBUG) {
+            printf("Collision at arr[%d].\n\n", location);
+        }
+
         return 1;
     }
 
@@ -57,18 +62,24 @@ int applyStep(int loc, int arr[], int size) {
         loc = applyStep(loc, arr, size);
     }
 
-    if (DEBUG) {
-        printf("Apply step returned loc(%d)\n", loc);
-    }
+//    if (DEBUG) {
+//        printf("Apply step returned loc(%d)\n", loc);
+//    }
 
     return loc;
 
 }
 
-int openAddressHash(int k) {
+int openAddressGetPosition(int k) {
 
 
     int loc = h2(h1(k, 17));
+
+    if (DEBUG) {
+        printf("Double hash for k(%d) is %d\n\n", k, loc);
+    }
+
+
 
     if (hasCollision(loc, openAddArr)) {
         if (DEBUG) {
@@ -82,13 +93,13 @@ int openAddressHash(int k) {
     return loc;
 }
 
-void applyOpenAddressHash() {
+void openAddressHashInsertAll() {
 
     for (int i = 0; i < 8; ++i) {
-        int loc = openAddressHash(baseArr[i]);
+        int loc = openAddressGetPosition(baseArr[i]);
         openAddArr[loc] = baseArr[i];
         if (DEBUG) {
-            printf("openAddArr[%d] = %d;\n", loc, baseArr[i]);
+            printf("openAddArr[%d] = %d;\n\n\n", loc, baseArr[i]);
         }
 
     }
@@ -99,10 +110,10 @@ void applyOpenAddressHash() {
 
 }
 
-void applyLinkingHash(){
+void linkingHashInsertAll(){
 
 
-    printf("Processed Linked: ");
+    printf("Processed Linked List Table: ");
     printIntArr(linkingArr, 5);
 }
 
@@ -115,15 +126,15 @@ int main(int argc, char const *argv[]) {
     printf("\n\n=======================================================================\n");
     printf("Open Address:           ");
     printIntArr(openAddArr, 17);
-    applyOpenAddressHash();
+    openAddressHashInsertAll();
     printf("======================================================================= \n\n\n");
 
 
-    printf("=======================================================================\n");
-    printf("Linked: ");
-    printIntArr(linkingArr, 5);
-    applyLinkingHash();
-    printf("=======================================================================\n\n\n");
+//    printf("=======================================================================\n");
+//    printf("Linked List Table: ");
+//    printIntArr(linkingArr, 5);
+//    linkingHashInsertAll();
+//    printf("=======================================================================\n\n\n");
 
 
     printf("\n\nChange DEBUG=1 to view more complete readout...\n\n");

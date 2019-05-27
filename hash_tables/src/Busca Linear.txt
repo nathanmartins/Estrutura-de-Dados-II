@@ -1,0 +1,89 @@
+Digite a Chave: 36
+Digite o Nome: a
+Digite a Idade: 2
+------------------------------------
+ newPos = 2     i = 0
+------------------------------------
+Digite a Chave: 53
+Digite o Nome: a
+Digite a Idade: 2
+------------------------------------
+ newPos = 2     i = 0
+ newPos = 3     i = 1
+------------------------------------
+Digite a Chave: 70
+Digite o Nome: a
+Digite a Idade: 2
+------------------------------------
+ newPos = 2     i = 0
+ newPos = 3     i = 1
+ newPos = 4     i = 2
+------------------------------------
+Digite a Chave: 87
+Digite o Nome: a
+Digite a Idade: 2
+------------------------------------
+ newPos = 2     i = 0
+ newPos = 3     i = 1
+ newPos = 4     i = 2
+ newPos = 5     i = 3
+------------------------------------
+Digite a Chave: 54
+Digite o Nome: a
+Digite a Idade: 2
+------------------------------------
+ newPos = 3     i = 0
+ newPos = 4     i = 1
+ newPos = 5     i = 2
+ newPos = 6     i = 3
+------------------------------------
+Digite a Chave: 37
+Digite o Nome: a
+Digite a Idade: 2
+------------------------------------
+ newPos = 3     i = 0
+ newPos = 4     i = 1
+ newPos = 5     i = 2
+ newPos = 6     i = 3
+ newPos = 7     i = 4
+------------------------------------
+Digite a Chave: 71
+Digite o Nome: a
+Digite a Idade: 2
+------------------------------------
+ newPos = 3     i = 0
+ newPos = 4     i = 1
+ newPos = 5     i = 2
+ newPos = 6     i = 3
+ newPos = 7     i = 4
+ newPos = 8     i = 5
+------------------------------------
+Digite a Chave: 40
+Digite o Nome: a
+Digite a Idade: 2
+------------------------------------
+ newPos = 6     i = 0
+ newPos = 7     i = 1
+ newPos = 8     i = 2
+ newPos = 9     i = 3
+------------------------------------
+#    CODIGO   NOME            IDADE
+------------------------------------
+0
+1
+2    36       a               2
+3    53       a               2
+4    70       a               2
+5    87       a               2
+6    54       a               2
+7    37       a               2
+8    71       a               2
+9    40       a               2
+10
+11
+12
+13
+14
+15
+16
+------------------------------------

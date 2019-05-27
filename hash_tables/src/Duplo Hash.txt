@@ -1,0 +1,82 @@
+Digite a Chave: 36
+Digite o Nome: a
+Digite a Idade: 2
+------------------------------------
+ newPos = 2     i = 0
+------------------------------------
+Digite a Chave: 53
+Digite o Nome: a
+Digite a Idade: 2
+------------------------------------
+ newPos = 2     i = 0
+ newPos = 8     i = 1
+------------------------------------
+Digite a Chave: 70
+Digite o Nome: a
+Digite a Idade: 2
+------------------------------------
+ newPos = 2     i = 0
+ newPos = 9     i = 1
+------------------------------------
+Digite a Chave: 87
+Digite o Nome: a
+Digite a Idade: 2
+------------------------------------
+ newPos = 2     i = 0
+ newPos = 10    i = 1
+------------------------------------
+Digite a Chave: 54
+Digite o Nome: a
+Digite a Idade: 2
+
+------------------------------------
+ newPos = 3     i = 0
+------------------------------------
+Digite a Chave: 37
+Digite o Nome: a
+Digite a Idade: 2
+------------------------------------
+ newPos = 3     i = 0
+ newPos = 9     i = 1
+ newPos = 15    i = 2
+------------------------------------
+Digite a Chave: 71
+Digite o Nome: a
+Digite a Idade: 2
+------------------------------------
+ newPos = 3     i = 0
+ newPos = 11    i = 1
+------------------------------------
+Digite a Chave: 40
+Digite o Nome: a
+Digite a Idade: 2
+------------------------------------
+ newPos = 6     i = 0
+------------------------------------
+
+
+
+
+
+
+
+#    CODIGO   NOME            IDADE
+------------------------------------
+0
+1
+2    36       a               2
+3    54       a               2
+4
+5
+6    40       a               2
+7
+8    53       a               2
+9    70       a               2
+10   87       a               2
+11   71       a               2
+12
+13
+14
+15   37       a               2
+16
+------------------------------------

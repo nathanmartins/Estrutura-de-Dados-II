@@ -1,20 +1,17 @@
 #include <stdio.h>
-
-#define MAXN 13
-
-typedef int TipoChave;
+#include <stdlib.h>
+#define MAXN 17
 
 typedef struct {
-  TipoChave Chave;  
+  int Chave;
   char Nome[10];
-  int Idade;  
+  int Idade;
 } TipoRegistro;
 
-typedef int TipoIndice;
 
 typedef struct {
   TipoRegistro Item[MAXN + 1] ;
-  TipoIndice n;
+  int n;
 } TipoTabela;
 
 typedef struct {
@@ -43,16 +40,60 @@ void Inicializa (TipoTabela *T) {
     }
 }
 
-TipoIndice Hash(TipoChave Chave) { 
+int Hash(int Chave) { 
   return (Chave % MAXN); 
 } 
 
-/*
-* Implementação básica, sem previsão de colisões
-*/
+int sondagemLinear(int pos, int i){
+    return (pos + i) % MAXN;
+}
+
+int sondagemQuadratica(int pos, int i){
+    pos = pos + i*i;// hash + (c1 * i) + (c2 * i^2)
+    return (pos) % MAXN;
+}
+
+int duploHash(int pos, int chave, int i){
+	int max=MAXN;
+	max-=1;
+    int H2 = (chave % max) + 1;
+    return (pos + i*H2) % MAXN;
+}
+
+int InsereSemColidirAberto(TipoTabela *T, TipoRegistro Reg){
+    if(T == NULL || T->n == MAXN){
+        return 0;
+    }
+
+    int chave = Reg.Chave;
+
+    int i; 
+	int pos, newPos;
+    pos = Hash(chave);
+    for(i=0; i < MAXN; i++){
+        //newPos = sondagemLinear(pos,i);
+        //newPos = sondagemQuadratica(pos,i);
+        newPos = duploHash(pos,chave,i);
+        printf("\n newPos = %d\ti = %d \n", newPos, i);
+        if(T->Item[newPos].Chave == -1){
+            TipoRegistro* novo;
+            novo = (TipoRegistro*) malloc(sizeof(TipoRegistro));
+            if(novo == NULL){
+                return 0;
+            }else{
+	            *novo = Reg;
+	            T->Item[newPos]=*novo;
+	            T->n++;
+	            return 1;
+	        }
+        }
+    }
+    return 0;
+}
+
 bool Insere(TipoRegistro Reg, TipoTabela *T) {     
   bool sucesso = false;
-  TipoIndice i = Hash(Reg.Chave);
+  int i = Hash(Reg.Chave);
  
   if (T->Item[i].Chave == -1) {
     T->Item[i] = Reg;
@@ -63,14 +104,14 @@ bool Insere(TipoRegistro Reg, TipoTabela *T) {
   return sucesso;
 } 
 
-TipoIndice Busca(TipoChave Chave, TipoTabela *T) {  
-  TipoIndice indice = Hash(Chave);
+int Busca(int Chave, TipoTabela *T) {  
+  int indice = Hash(Chave);
   return (T->Item[indice].Chave != -1) ? indice : -1;
 }
 
-bool Exclui(TipoChave Chave, TipoTabela *T) {
+bool Exclui(int Chave, TipoTabela *T) {
   bool sucesso = false;
-  TipoIndice indice = Busca(Chave, T);
+  int indice = Busca(Chave, T);
 
    if (T->Item[indice].Chave == Chave) {    
     TipoRegistro a = {-1, "", 0};
@@ -82,24 +123,41 @@ bool Exclui(TipoChave Chave, TipoTabela *T) {
   return sucesso;
 }
 
+/*
 void CargaInicialParaTeste(TipoTabela *T) {
-  TipoRegistro a1 = {49, "Renan", 32};
+  TipoRegistro a1 = {36, "Renan", 32};
   Insere(a1, T);
 
-  TipoRegistro a2 = {58, "Maria", 65};
+  TipoRegistro a2 = {53, "Maria", 65};
   Insere(a2, T);  
 
   /*
   * Colisão. Esta implementação básica
   * não vai inserir o registro.
+  
+  36, 53, 70, 87, 54, 37, 71 e 40
   */
-  TipoRegistro a3 = {23, "Carla", 18};
+  /*
+  TipoRegistro a3 = {70, "Carla", 18};
   Insere(a3, T);
 
-  TipoRegistro a4 = {67, "Pedro", 25};
+  TipoRegistro a4 = {87, "Pedro", 25};
   Insere(a4, T);
+  
+  TipoRegistro a5 = {54, "Pedro", 25};
+  Insere(a5, T);
+  
+  TipoRegistro a6 = {37, "Pedro", 25};
+  Insere(a6, T);
+  
+  TipoRegistro a7 = {71, "Pedro", 25};
+  Insere(a7, T);
+  
+  TipoRegistro a8 = {40, "Pedro", 25};
+  Insere(a8, T);
 }
-
+]
+*/
 int LerOpcaoMenu() {
   int opcao;
     
@@ -128,7 +186,7 @@ void OpcaoInserirRegistro(TipoTabela *T) {
 
   printf("\n------------------------------------\n");
   
-  if (Insere(a, T))
+  if (InsereSemColidirAberto(T, a))
     printf("O registro foi inserido com sucesso.");
   else
     printf("Não foi possível inserir o registro.");
@@ -141,11 +199,11 @@ void OpcaoInserirRegistro(TipoTabela *T) {
 }
 
 void OpcaoPesquisarRegistro(TipoTabela *T) {
-  TipoChave chaveDePesquisa;
+  int chaveDePesquisa;
   printf("Digite a chave de pesquisa: ");
   scanf("%d", &chaveDePesquisa);
 
-  TipoIndice indice = Busca(chaveDePesquisa, T);
+  int indice = Busca(chaveDePesquisa, T);
 
   if (T->Item[indice].Chave == chaveDePesquisa) {
     printf("\n------------------------------------\n");
@@ -162,7 +220,7 @@ void OpcaoPesquisarRegistro(TipoTabela *T) {
 }
 
 bool OpcaoExcluirRegistro(TipoTabela *T) {  
-  TipoChave chaveDePesquisa;
+  int chaveDePesquisa;
 
   printf("Digite a chave de pesquisa: ");
   scanf("%d", &chaveDePesquisa);
@@ -190,14 +248,14 @@ int main(int argc, char *argv[]) {
 
   Inicializa(&tabelaDeAlunos);
     
-  CargaInicialParaTeste(&tabelaDeAlunos);
+  //CargaInicialParaTeste(&tabelaDeAlunos);
 
 
   do {
     opcao = LerOpcaoMenu();
 
     switch(opcao) {    
-     case 2: OpcaoPesquisarRegistro(&tabelaDeAlunos); break;   
+     case 2: OpcaoPesquisarRegistro(&tabelaDeAlunos); break;  
      case 3: OpcaoInserirRegistro(&tabelaDeAlunos); break;
      case 4: OpcaoExcluirRegistro(&tabelaDeAlunos); break;
      default: ListaTabela(&tabelaDeAlunos);  
@@ -207,3 +265,14 @@ int main(int argc, char *argv[]) {
 
 	return 0;
 }
+/*
+
+1) Suponha uma tabela hash armazenar valores de chaves. Insira as seguintes chaves nessa tabela: 36,
+53, 70, 87, 54, 37, 71 e 40, nessa ordem. Considere os diferentes métodos:
+a) Endereçamento Aberto (tabela hash de tamanho 17)
+• Exploração linear: Passo(k) = k % arraySize+ 1
+• Exploração quadrática: Passo(k) = k % arraySize + i2
+• Hash duplo: h1(k) = k % arraySize; h2(k) = 5 - (k % 5)
+b) Encadeamento separado (tabela hash de tamanho 5)]
+
+*/

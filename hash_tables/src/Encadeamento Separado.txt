@@ -1,0 +1,79 @@
+Enter the number of elements:5
+
+Enter your choice:1
+Enter the key value:36
+Name:a
+Age:2
+
+Chave = 1
+
+Enter the key value:53
+Name:a
+Age:2
+
+Chave = 3
+
+Enter the key value:70
+Name:a
+Age:2
+
+Chave = 0
+
+Enter the key value:87
+Name:a
+Age:2
+
+Chave = 2
+
+Enter the key value:54
+Name:a
+Age:2
+
+Chave = 4
+
+Enter the key value:37
+Name:a
+Age:2
+
+Chave = 2
+
+Enter the key value:71
+Name:a
+Age:2
+
+Chave = 1
+
+Enter the key value:40
+Name:a
+Age:2
+
+Chave = 0
+
+
+Data at index 0 in Hash Table:
+VoterID     Name          Age
+--------------------------------
+40          a              2
+70          a              2
+
+Data at index 1 in Hash Table:
+VoterID     Name          Age
+--------------------------------
+71          a              2
+36          a              2
+
+Data at index 2 in Hash Table:
+VoterID     Name          Age
+--------------------------------
+37          a              2
+87          a              2
+
+Data at index 3 in Hash Table:
+VoterID     Name          Age
+--------------------------------
+53          a              2
+
+Data at index 4 in Hash Table:
+VoterID     Name          Age
+--------------------------------
+54          a              2

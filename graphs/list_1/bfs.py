@@ -79,8 +79,8 @@ if __name__ == '__main__':
         [0, 0, 0, 0, 1, 0, 1, 1, 0, 0, ],
     ])
 
-    # breadth_first_search(a, 0)
+    breadth_first_search(a, 0)
     # breadth_first_search(b, 0)
 
     # depth_first_search(a, 0)
-    depth_first_search(b, 0)
+    # depth_first_search(b, 0)

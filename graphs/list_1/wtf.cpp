@@ -19,12 +19,31 @@ typedef struct {
 	int n;
 } TipoPilha;
 
+struct node
+{
+    TipoVertice vertex;
+    struct node* next;
+};
+
+
 typedef struct {
 	TipoVertice ListaVertices[MAX_VERT];   
 	int MatrizAdj[MAX_VERT][MAX_VERT];
 	TipoPilha Pilha;
+	struct node** adjLists;
+	int* visited;
 	int n;
 } TipoGrafo;
+
+
+struct queue {
+    TipoVertice Items[50];  
+    int front;
+    int rear;
+};
+
+
+
 
 void InicializaPilha (TipoPilha *Pilha) {   
   Pilha->n = 0;
@@ -75,7 +94,19 @@ TipoVertice* VerTopo(TipoPilha* Pilha) {
 void InicializaGrafo (TipoGrafo *Grafo) {   
   InicializaPilha(&(Grafo->Pilha));
   Grafo->n = 0;  
-  
+
+  	int vertices = 6;
+   
+    //Grafo->adjLists = malloc(vertices * sizeof(struct node*));
+    //Grafo->visited = malloc(vertices * sizeof(int));
+    
+ 
+    int i;
+    for (i = 0; i < vertices; i++) {
+        Grafo->adjLists[i] = NULL;
+        Grafo->visited[i] = 0;
+    }
+   
 	for(int i=0; i<MAX_VERT; i++) {
 		for(int j=0; j<MAX_VERT; j++) {
 			Grafo->MatrizAdj[i][j] = 0;
@@ -144,44 +175,114 @@ void ZerarFlagsVisitado(TipoGrafo* Grafo) {
 	}
 }
 
-void BuscaEmProfundidade(TipoGrafo* Grafo) {
+// void BuscaEmProfundidade(TipoGrafo* Grafo) {
 
-	printf("\nDFS\n");
+// 	printf("\nDFS\n");
+// 	TipoVertice* vInicio = &(Grafo->ListaVertices[0]);
+// 	vInicio->FoiVisitado = 1;
+// 	//ImprimeVertice(vInicio);
+// 	Empilha(&(Grafo->Pilha), vInicio);
+
+// 	printf("\n------- Pilha visitada inicial --------------\n");
+// 	ListaPilha(&(Grafo->Pilha));
+// 	printf("\n-----------------------------------\n");
+
+		
+// 	while(!PilhaVazia(&(Grafo->Pilha))) {
+		
+// 		TipoVertice *topo = VerTopo(&(Grafo->Pilha));			
+// 		TipoVertice *v = AdjNaoVisitado(Grafo, topo);
+		
+// 		 if (v == NULL) {
+// 		 	Desempilha(&(Grafo->Pilha));
+// 		 } else {
+// 		 	v->FoiVisitado = 1;
+// 		 	//ImprimeVertice(v);
+// 		 	Empilha(&(Grafo->Pilha), v);
+
+// 			printf("\n------- Pilha visitada --------------\n");
+// 			ListaPilha(&(Grafo->Pilha));
+// 			printf("\n-----------------------------------\n");
+		 	
+// 		 }	
+		
+
+
+// 	}
+
+// 	ZerarFlagsVisitado(Grafo);
+	 
+// }
+
+int isEmpty(struct queue* q) {
+    if(q->rear == -1) 
+        return 1;
+    else 
+        return 0;
+}
+
+
+void enqueue(struct queue* q, TipoVertice* value){
+    if(q->rear == 50-1)
+        printf("\nQueue is Full!!");
+    else {
+        if(q->front == -1)
+            q->front = 0;
+        q->rear++;
+        q->Items[q->rear] = *value;
+    }
+}
+
+TipoVertice* dequeue(struct queue* q){
+    TipoVertice* item;
+   
+    item = &q->Items[q->front];
+    
+    q->front++;
+
+    if(q->front > q->rear){
+        printf("Resetting queue\n");
+        q->front = q->rear = -1;
+    }
+    
+    return item;
+}
+
+
+void bfs(TipoGrafo* Grafo, queue* q) {
+
+
+    printf("\nBFS\n");
 	TipoVertice* vInicio = &(Grafo->ListaVertices[0]);
 	vInicio->FoiVisitado = 1;
-	//ImprimeVertice(vInicio);
-	Empilha(&(Grafo->Pilha), vInicio);
+   
+    enqueue(q, vInicio);
+    
+    while(!isEmpty(q)){
 
-	printf("\n------- Pilha visitada inicial --------------\n");
-	ListaPilha(&(Grafo->Pilha));
-	printf("\n-----------------------------------\n");
+    	ListaGrafo(Grafo);
+		TipoVertice* currentVertex = dequeue(q);
+      	
+        printf("Visited: \n");
+        ImprimeVertice(currentVertex);
+    
+        //struct node* temp = Grafo->adjLists[currentVertex];
+    
+       // while(temp) {
+       //      TipoVertice adjVertex* = temp->vertex;
+       //      if(Grafo->visited[adjVertex] == 0){
+       //          Grafo->visited[adjVertex] = 1;
+       //          enqueue(q, adjVertex);
+       //      }
+       //      temp = temp->next;
+       // }
 
-		
-	while(!PilhaVazia(&(Grafo->Pilha))) {
-		
-		TipoVertice *topo = VerTopo(&(Grafo->Pilha));			
-		TipoVertice *v = AdjNaoVisitado(Grafo, topo);
-		
-		 if (v == NULL) {
-		 	Desempilha(&(Grafo->Pilha));
-		 } else {
-		 	v->FoiVisitado = 1;
-		 	//ImprimeVertice(v);
-		 	Empilha(&(Grafo->Pilha), v);
-
-			printf("\n------- Pilha visitada --------------\n");
-			ListaPilha(&(Grafo->Pilha));
-			printf("\n-----------------------------------\n");
-		 	
-		 }	
-		
-
-
-	}
-
-	ZerarFlagsVisitado(Grafo);
-	 
+  
+    }
 }
+
+
+
 
 void InserirItensParaTeste(TipoGrafo* Grafo) {
 	TipoRegistro a1 = {"A"};
@@ -218,13 +319,19 @@ void InserirItensParaTeste(TipoGrafo* Grafo) {
 int main(int argc, char *argv[]) {
  	
  	TipoGrafo Grafo;	 
+
+ 	queue q;
+
+    q.front = -1;
+    q.rear = -1;
+
 	InicializaGrafo(&Grafo);
 	
 	InserirItensParaTeste(&Grafo);	
 		 	
  	ListaGrafo(&Grafo);
- 	
- 	BuscaEmProfundidade(&Grafo);
+ 	bfs(&Grafo, &q);
+
  	
 	return 0;
 }

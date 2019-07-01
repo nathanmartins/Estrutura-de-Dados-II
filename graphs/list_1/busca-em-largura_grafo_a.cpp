@@ -144,40 +144,40 @@ void ZerarFlagsVisitado(TipoGrafo* Grafo) {
 	}
 }
 
-void BuscaEmProfundidade(TipoGrafo* Grafo) {
+void BuscaEmLargura(TipoGrafo* Grafo) {
 
-	printf("\nDFS\n");
+	printf("\nBFS\n");
 	TipoVertice* vInicio = &(Grafo->ListaVertices[0]);
 	vInicio->FoiVisitado = 1;
-	//ImprimeVertice(vInicio);
-	Empilha(&(Grafo->Pilha), vInicio);
+	ImprimeVertice(vInicio);
+	// Empilha(&(Grafo->Pilha), vInicio);
 
-	printf("\n------- Pilha visitada inicial --------------\n");
-	ListaPilha(&(Grafo->Pilha));
-	printf("\n-----------------------------------\n");
+	// printf("\n------- Pilha visitada inicial --------------\n");
+	// ListaPilha(&(Grafo->Pilha));
+	// printf("\n-----------------------------------\n");
 
 		
-	while(!PilhaVazia(&(Grafo->Pilha))) {
+	// while(!PilhaVazia(&(Grafo->Pilha))) {
 		
-		TipoVertice *topo = VerTopo(&(Grafo->Pilha));			
-		TipoVertice *v = AdjNaoVisitado(Grafo, topo);
+	// 	TipoVertice *topo = VerTopo(&(Grafo->Pilha));			
+	// 	TipoVertice *v = AdjNaoVisitado(Grafo, topo);
 		
-		 if (v == NULL) {
-		 	Desempilha(&(Grafo->Pilha));
-		 } else {
-		 	v->FoiVisitado = 1;
-		 	//ImprimeVertice(v);
-		 	Empilha(&(Grafo->Pilha), v);
+	// 	 if (v == NULL) {
+	// 	 	Desempilha(&(Grafo->Pilha));
+	// 	 } else {
+	// 	 	v->FoiVisitado = 1;
+	// 	 	//ImprimeVertice(v);
+	// 	 	Empilha(&(Grafo->Pilha), v);
 
-			printf("\n------- Pilha visitada --------------\n");
-			ListaPilha(&(Grafo->Pilha));
-			printf("\n-----------------------------------\n");
+	// 		printf("\n------- Pilha visitada --------------\n");
+	// 		ListaPilha(&(Grafo->Pilha));
+	// 		printf("\n-----------------------------------\n");
 		 	
-		 }	
+	// 	 }	
 		
 
 
-	}
+	// }
 
 	ZerarFlagsVisitado(Grafo);
 	 
@@ -224,7 +224,7 @@ int main(int argc, char *argv[]) {
 		 	
  	ListaGrafo(&Grafo);
  	
- 	BuscaEmProfundidade(&Grafo);
+ 	BuscaEmLargura(&Grafo);
  	
 	return 0;
 }

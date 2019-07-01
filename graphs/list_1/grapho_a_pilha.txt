@@ -1,0 +1,58 @@
+
+GRAFO
+----------------------------------------------------------------------------
+   0  1  2  3  4  5  
+0  0  0  0  1  1  1  
+1  0  0  0  1  1  1  
+2  0  0  0  1  1  1  
+3  1  1  1  0  0  0  
+4  1  1  1  0  0  0  
+5  1  1  1  0  0  0  
+----------------------------------------------------------------------------
+
+DFS
+
+------- Pilha visitada inicial --------------
+Ordem: 0   Letra: A 
+
+-----------------------------------
+
+------- Pilha visitada --------------
+Ordem: 3   Letra: D 
+Ordem: 0   Letra: A 
+
+-----------------------------------
+
+------- Pilha visitada --------------
+Ordem: 1   Letra: B 
+Ordem: 3   Letra: D 
+Ordem: 0   Letra: A 
+
+-----------------------------------
+
+------- Pilha visitada --------------
+Ordem: 4   Letra: E 
+Ordem: 1   Letra: B 
+Ordem: 3   Letra: D 
+Ordem: 0   Letra: A 
+
+-----------------------------------
+
+------- Pilha visitada --------------
+Ordem: 2   Letra: C 
+Ordem: 4   Letra: E 
+Ordem: 1   Letra: B 
+Ordem: 3   Letra: D 
+Ordem: 0   Letra: A 
+
+-----------------------------------
+
+------- Pilha visitada --------------
+Ordem: 5   Letra: F 
+Ordem: 2   Letra: C 
+Ordem: 4   Letra: E 
+Ordem: 1   Letra: B 
+Ordem: 3   Letra: D 
+Ordem: 0   Letra: A 
+
+-----------------------------------

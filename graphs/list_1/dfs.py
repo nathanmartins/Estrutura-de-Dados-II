@@ -4,62 +4,94 @@
 # Author: nsm(Nathan Santos Martins)
 # 06/30/2019
 
+from pprint import pprint
+
+graph = dict()
 
 
-# Python program to print DFS traversal from a 
-# given given graph 
-from collections import defaultdict 
+class Node:
+	visited = False
+	letter = None
+	connections = list()
 
-# This class represents a directed graph using 
-# adjacency list representation 
-class Graph: 
-
-	# Constructor 
-	def __init__(self): 
-
-		# default dictionary to store graph 
-		self.graph = defaultdict(list) 
-
-	# function to add an edge to graph 
-	def addEdge(self,u,v): 
-		self.graph[u].append(v) 
-
-	# A function used by DFS 
-	def DFSUtil(self,v,visited): 
-
-		# Mark the current node as visited and print it 
-		visited[v]= True
-		print v, 
-
-		# Recur for all the vertices adjacent to this vertex 
-		for i in self.graph[v]: 
-			if visited[i] == False: 
-				self.DFSUtil(i, visited) 
+	def __init__(self, letter):
+		self.letter = letter
 
 
-	# The function to do DFS traversal. It uses 
-	# recursive DFSUtil() 
-	def DFS(self,v): 
+	def connect(self, node):
+		self.connections.append(node)
 
-		# Mark all the vertices as not visited 
-		visited = [False]*(len(self.graph)) 
-
-		# Call the recursive helper function to print 
-		# DFS traversal 
-		self.DFSUtil(v,visited) 
+	def __repr__(self):
+		return "'{}' visited: {}".format(self.letter, self.visited)
 
 
-# Driver code 
-# Create a graph given in the above diagram 
-g = Graph() 
-g.addEdge(0, 1) 
-g.addEdge(0, 2) 
-g.addEdge(1, 2) 
-g.addEdge(2, 0) 
-g.addEdge(2, 3) 
-g.addEdge(3, 3) 
+# class Connection:
+# 	node_1 = None
+# 	node_2 = None
 
-print "Following is DFS from (starting from vertex 2)"
-g.DFS(2) 
 
-# This code is contributed by Neelam Yadav 
+# 	def __init__(self, n1, n2):
+# 		self.node_1 = n1
+# 		self.node_2 = n2
+
+# 	def __repr__(self):
+# 		return "'{}' -- '{}'".format(self.node_1 self.node_2)
+
+
+
+# nodes = list()
+
+# for letter in list(map(chr, range(97, 103))):
+# 	nodes.append(Node(letter.upper()))
+
+# for node in nodes:
+# 	graph[node.letter] = list()
+
+
+a = Node("A")
+b = Node("B")
+c = Node("C")
+
+d = Node("D")
+e = Node("E")
+f = Node("F")
+
+
+a.connect(d)
+a.connect(e)
+a.connect(f)
+
+b.connect(d)
+b.connect(e)
+b.connect(f)
+
+c.connect(d)
+c.connect(e)
+c.connect(f)
+
+
+def visit(node):
+	
+	# print("Visiting node: " + node.letter)
+
+	for connection in node.connections:
+		if connection.visited is False:
+			print("Visiting: " + connection.letter)
+			connection.visited = True
+
+			for cc in connection.connections:
+				visit(cc)
+
+
+
+
+
+
+visit(a)
+
+
+
+
+
+
+

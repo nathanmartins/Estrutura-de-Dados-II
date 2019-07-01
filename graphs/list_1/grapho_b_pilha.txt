@@ -1,0 +1,112 @@
+
+GRAFO
+----------------------------------------------------------------------------
+   0  1  2  3  4  5  6  7  8  9  
+0  0  1  0  0  1  1  0  0  0  0  
+1  1  0  1  0  0  0  1  0  0  0  
+2  0  1  0  1  0  0  0  1  0  0  
+3  0  0  1  0  1  0  0  0  1  0  
+4  1  0  0  1  0  0  0  0  0  1  
+5  1  0  0  0  0  0  0  1  1  0  
+6  0  1  0  0  0  0  0  0  1  1  
+7  0  0  1  0  0  1  0  0  0  1  
+8  0  0  0  1  0  1  1  0  0  0  
+9  0  0  0  0  1  0  1  1  0  0  
+----------------------------------------------------------------------------
+
+DFS
+
+------- Pilha visitada inicial --------------
+Ordem: 0   Letra: A 
+
+-----------------------------------
+
+------- Pilha visitada --------------
+Ordem: 1   Letra: B 
+Ordem: 0   Letra: A 
+
+-----------------------------------
+
+------- Pilha visitada --------------
+Ordem: 2   Letra: C 
+Ordem: 1   Letra: B 
+Ordem: 0   Letra: A 
+
+-----------------------------------
+
+------- Pilha visitada --------------
+Ordem: 3   Letra: D 
+Ordem: 2   Letra: C 
+Ordem: 1   Letra: B 
+Ordem: 0   Letra: A 
+
+-----------------------------------
+
+------- Pilha visitada --------------
+Ordem: 4   Letra: E 
+Ordem: 3   Letra: D 
+Ordem: 2   Letra: C 
+Ordem: 1   Letra: B 
+Ordem: 0   Letra: A 
+
+-----------------------------------
+
+------- Pilha visitada --------------
+Ordem: 9   Letra: J 
+Ordem: 4   Letra: E 
+Ordem: 3   Letra: D 
+Ordem: 2   Letra: C 
+Ordem: 1   Letra: B 
+Ordem: 0   Letra: A 
+
+-----------------------------------
+
+------- Pilha visitada --------------
+Ordem: 6   Letra: G 
+Ordem: 9   Letra: J 
+Ordem: 4   Letra: E 
+Ordem: 3   Letra: D 
+Ordem: 2   Letra: C 
+Ordem: 1   Letra: B 
+Ordem: 0   Letra: A 
+
+-----------------------------------
+
+------- Pilha visitada --------------
+Ordem: 8   Letra: I 
+Ordem: 6   Letra: G 
+Ordem: 9   Letra: J 
+Ordem: 4   Letra: E 
+Ordem: 3   Letra: D 
+Ordem: 2   Letra: C 
+Ordem: 1   Letra: B 
+Ordem: 0   Letra: A 
+
+-----------------------------------
+
+------- Pilha visitada --------------
+Ordem: 5   Letra: F 
+Ordem: 8   Letra: I 
+Ordem: 6   Letra: G 
+Ordem: 9   Letra: J 
+Ordem: 4   Letra: E 
+Ordem: 3   Letra: D 
+Ordem: 2   Letra: C 
+Ordem: 1   Letra: B 
+Ordem: 0   Letra: A 
+
+-----------------------------------
+
+------- Pilha visitada --------------
+Ordem: 7   Letra: H 
+Ordem: 5   Letra: F 
+Ordem: 8   Letra: I 
+Ordem: 6   Letra: G 
+Ordem: 9   Letra: J 
+Ordem: 4   Letra: E 
+Ordem: 3   Letra: D 
+Ordem: 2   Letra: C 
+Ordem: 1   Letra: B 
+Ordem: 0   Letra: A 
+
+-----------------------------------

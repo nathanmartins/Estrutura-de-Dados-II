@@ -5,9 +5,7 @@
 #define MAX_VERT 20
 
 typedef struct {
-	char Cidade[30];	
-	char Gentilico[20];  
-	char Prefeito[20];  
+	char Letra[2];	  
 } TipoRegistro;
 
 typedef struct {
@@ -32,20 +30,19 @@ void InicializaPilha (TipoPilha *Pilha) {
   Pilha->n = 0;
 }
 
-void ImprimeTituloVertice() {
-	printf("%-3s %-25s %-18s %-18s %-5s\n", "#","CIDADE", "GENTILICO", "PREFEITO", "VISITADO?");
-}
 
 void ImprimeVertice(TipoVertice *v){
-	printf("%-3d %-25s %-18s %-18s %-5d\n",v->Ordem, v->Item.Cidade, v->Item.Gentilico, v->Item.Prefeito, v->FoiVisitado); 
+	printf("Ordem: %-3d Letra: %s \n",v->Ordem, v->Item.Letra); 
 }
 
+
+
 void ListaPilha(TipoPilha* Pilha) {
-	ImprimeTituloVertice();
 	for(int i = Pilha->n-1; i >=0; i--) {
 	    ImprimeVertice(&(Pilha->Reg[i]));		
 	}
 }
+
 
 int PilhaVazia(TipoPilha* Pilha) {
 	if (Pilha->n > 0) 
@@ -100,10 +97,10 @@ void adicionaVertice(TipoGrafo *Grafo, TipoRegistro Reg) {
 void ListaGrafo(TipoGrafo* Grafo) {
 	
 	printf("\nGRAFO\n");	
-	ImprimeTituloVertice();
-	for(int i=0; i < Grafo->n; i++) {
-	    ImprimeVertice(&(Grafo->ListaVertices[i]));
-	}
+	// ImprimeTituloVertice();
+	// for(int i=0; i < Grafo->n; i++) {
+	//     ImprimeVertice(&(Grafo->ListaVertices[i]));
+	// }
 	printf("----------------------------------------------------------------------------\n");
 	
 	printf("%-3s", "");
@@ -119,6 +116,9 @@ void ListaGrafo(TipoGrafo* Grafo) {
 		}
 		printf("\n");
 	}
+
+	printf("----------------------------------------------------------------------------\n");
+	
 	
 }
 
@@ -149,8 +149,13 @@ void BuscaEmProfundidade(TipoGrafo* Grafo) {
 	printf("\nDFS\n");
 	TipoVertice* vInicio = &(Grafo->ListaVertices[0]);
 	vInicio->FoiVisitado = 1;
-	ImprimeVertice(vInicio);
+	//ImprimeVertice(vInicio);
 	Empilha(&(Grafo->Pilha), vInicio);
+
+	printf("\n------- Pilha visitada inicial --------------\n");
+	ListaPilha(&(Grafo->Pilha));
+	printf("\n-----------------------------------\n");
+
 		
 	while(!PilhaVazia(&(Grafo->Pilha))) {
 		
@@ -161,9 +166,17 @@ void BuscaEmProfundidade(TipoGrafo* Grafo) {
 		 	Desempilha(&(Grafo->Pilha));
 		 } else {
 		 	v->FoiVisitado = 1;
-		 	ImprimeVertice(v);
+		 	//ImprimeVertice(v);
 		 	Empilha(&(Grafo->Pilha), v);
-		 }		
+
+			printf("\n------- Pilha visitada --------------\n");
+			ListaPilha(&(Grafo->Pilha));
+			printf("\n-----------------------------------\n");
+		 	
+		 }	
+		
+
+
 	}
 
 	ZerarFlagsVisitado(Grafo);
@@ -171,41 +184,35 @@ void BuscaEmProfundidade(TipoGrafo* Grafo) {
 }
 
 void InserirItensParaTeste(TipoGrafo* Grafo) {
-	TipoRegistro a1 = {"Goiania", "Goianiense", "Iris Rezende"};
+	TipoRegistro a1 = {"A"};
 	adicionaVertice(Grafo, a1);
  	
- 	TipoRegistro a2 = {"Aparecida de Goiania", "Aparecidense", "Gustavo Mendanha"};
+ 	TipoRegistro a2 = {"B"};
 	adicionaVertice(Grafo, a2);
-	
-	TipoRegistro a3 = {"Senador Canedo", "Canedense", "Divino Pereira"};
+
+	TipoRegistro a3 = {"C"};
 	adicionaVertice(Grafo, a3);
-	
-	TipoRegistro a4 = {"Anapolis", "Anapolino", "Roberto Naves"};
-	adicionaVertice(Grafo, a4);	
-	
-	TipoRegistro a5 = {"Trindade", "Trindadense", "Janio Darrot"};
+
+	TipoRegistro a4 = {"D"};
+	adicionaVertice(Grafo, a4);
+
+	TipoRegistro a5 = {"E"};
 	adicionaVertice(Grafo, a5);
-	
-	TipoRegistro a6 = {"Hidrolandia", "Hidrolandense", "Paulo Sergio"};
+
+	TipoRegistro a6 = {"F"};
 	adicionaVertice(Grafo, a6);
-	
-	TipoRegistro a7 = {"Abadiania", "Abadiense", "Wilmar Arantes"};
-	adicionaVertice(Grafo, a7);
-	
-	TipoRegistro a8 = {"Prof. Jamil", "Jamilense", "Geraldo Antônio"};
-	adicionaVertice(Grafo, a8);
-	
-	TipoRegistro a9 = {"Corumba", "Corumbaense", "Ruiter Cunha"};
-	adicionaVertice(Grafo, a9);
-		 	
-	adicionarAresta(Grafo, 0, 1);	 	
-	adicionarAresta(Grafo, 0, 2);
+
+
 	adicionarAresta(Grafo, 0, 3);
 	adicionarAresta(Grafo, 0, 4);
+	adicionarAresta(Grafo, 0, 5);
+	adicionarAresta(Grafo, 1, 3);
+	adicionarAresta(Grafo, 1, 4);
 	adicionarAresta(Grafo, 1, 5);
-	adicionarAresta(Grafo, 3, 6);
-	adicionarAresta(Grafo, 5, 7);
-	adicionarAresta(Grafo, 6, 8);	
+	adicionarAresta(Grafo, 2, 3);
+	adicionarAresta(Grafo, 2, 4);
+	adicionarAresta(Grafo, 2, 5);
+
 }
 
 int main(int argc, char *argv[]) {

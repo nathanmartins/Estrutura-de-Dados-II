@@ -20,91 +20,40 @@ typedef struct {
 	int n;
 } TipoPilha;
 
+
+typedef struct {
+	TipoVertice Reg[50];  
+	int ultimo;     
+	int tamanho;     
+	int n;
+} TipoFila;
+
+
 typedef struct {
 	TipoVertice ListaVertices[MAX_VERT];   
 	int MatrizAdj[MAX_VERT][MAX_VERT];
 	TipoPilha Pilha;
+	TipoFila Fila;
 	int n;
 } TipoGrafo;
 
 
-struct Tipolista 
-{ 
-    int primeiro, ultimo, tamanho; 
-    unsigned capacidade; 
-    int* array; 
-}; 
-  
- 
-
-struct Tipolista* InicializaLista(unsigned capacidade) { 
-	struct Tipolista* lista = (struct Tipolista*) malloc(sizeof(struct Tipolista)); 
-	lista->capacidade = capacidade; 
-	lista->primeiro = lista->tamanho = 0; 
-	lista->ultimo = capacidade - 1; 
-	lista->array = (int*) malloc(lista->capacidade * sizeof(int)); 
-	return lista; 
-} 
 
 
-int listaEstaCheia(struct Tipolista* lista) 
-{ return (lista->tamanho == lista->capacidade); } 
+// int Desenfileira(struct Tipolista* lista) 
+// { 
+// 	if (listaEstaVazia(lista)) 
+// 		return INT_MIN; 
+// 	int item = lista->array[lista->primeiro]; 
+// 	lista->primeiro = (lista->primeiro + 1)%lista->capacidade; 
+// 	lista->tamanho = lista->tamanho - 1; 
+// 	return item; 
+// } 
 
- 
-int listaEstaVazia(struct Tipolista* lista) 
-{ return (lista->tamanho == 0); } 
-
-
-void Enfileira(struct Tipolista* lista, int item) 
-{ 
-	if (listaEstaCheia(lista)) 
-		return; 
-	lista->ultimo = (lista->ultimo + 1)%lista->capacidade; 
-	lista->array[lista->ultimo] = item; 
-	lista->tamanho = lista->tamanho + 1; 
-	printf("%d enfileirado a lista\n", item); 
-} 
-
-
-int Desenfileira(struct Tipolista* lista) 
-{ 
-	if (listaEstaVazia(lista)) 
-		return INT_MIN; 
-	int item = lista->array[lista->primeiro]; 
-	lista->primeiro = (lista->primeiro + 1)%lista->capacidade; 
-	lista->tamanho = lista->tamanho - 1; 
-	return item; 
-} 
-
-
-int PrimeiroDaLista(struct Tipolista* lista) 
-{ 
-	if (listaEstaVazia(lista)) 
-		return INT_MIN; 
-	return lista->array[lista->primeiro]; 
-} 
-
-
-int UltimoDaLista(struct Tipolista* lista) 
-{ 
-	if (listaEstaVazia(lista)) 
-		return INT_MIN; 
-	return lista->array[lista->ultimo]; 
-} 
-
-
-void imprimeLista(struct Tipolista* lista) {
-
-	if (listaEstaVazia(lista)){
-		return;
-	} 
-		
-	for(int i = lista->tamanho; i >=0; i--) {
-		printf("%d", lista->array[i]);
-	    // ImprimeVertice(&(lista->array[i]));		
-	}
+void InicializaFila (TipoFila *Fila) {   
+  Fila->n = 0;
 }
-  
+
 
 void InicializaPilha (TipoPilha *Pilha) {   
   Pilha->n = 0;
@@ -124,6 +73,18 @@ void ListaPilha(TipoPilha* Pilha) {
 }
 
 
+void ListaFila(TipoFila* Fila) {
+	for(int i = Fila->n-1; i >=0; i--) {
+	    ImprimeVertice(&(Fila->Reg[i]));		
+	}
+}
+
+int FilaVazia(TipoFila* Fila) {
+	if (Fila->n > 0) 
+		return 0;
+	else return 1;	
+}
+
 int PilhaVazia(TipoPilha* Pilha) {
 	if (Pilha->n > 0) 
 		return 0;
@@ -134,6 +95,16 @@ void Empilha(TipoPilha* Pilha, TipoVertice* v) {
 	Pilha->Reg[Pilha->n] = *v;	
 	Pilha->n++;	
 }
+
+
+void Enfileira(TipoFila* Fila, TipoVertice* v) { 
+	Fila->ultimo = (Fila->ultimo + 1)%50; 
+	Fila->Reg[Fila->ultimo] = *v; 
+	Fila->tamanho = Fila->tamanho + 1; 
+} 
+
+
+
 
 TipoVertice* Desempilha(TipoPilha* Pilha) {
 	TipoVertice* reg = NULL;
@@ -154,6 +125,8 @@ TipoVertice* VerTopo(TipoPilha* Pilha) {
 
 void InicializaGrafo (TipoGrafo *Grafo) {   
   InicializaPilha(&(Grafo->Pilha));
+  InicializaFila(&(Grafo->Fila));
+
   Grafo->n = 0;  
   
 	for(int i=0; i<MAX_VERT; i++) {
@@ -269,22 +242,23 @@ void BuscaEmLargura(TipoGrafo* Grafo){
 	TipoVertice* vInicio = &(Grafo->ListaVertices[0]);
 	vInicio->FoiVisitado = 1;
 	ImprimeVertice(vInicio);
-	// Empilha(&(Grafo->Pilha), vInicio);
+	Enfileira(&(Grafo->Fila), vInicio);
+	ListaFila(&(Grafo->Fila));
     
 
-	Tipolista* lista = InicializaLista(1000); 
+	// Tipolista* lista = InicializaLista(1000); 
 
-	Enfileira(lista, 10); 
-	Enfileira(lista, 20); 
-	Enfileira(lista, 30); 
-	Enfileira(lista, 40); 
+	// Enfileira(lista, 10); 
+	// Enfileira(lista, 20); 
+	// Enfileira(lista, 30); 
+	// Enfileira(lista, 40); 
 
-	imprimeLista(lista);
+	// imprimeLista(lista);
 
-	printf("%d dequeued from lista\n\n", Desenfileira(lista)); 
-	imprimeLista(lista);
-	printf("Front item is %d\n", PrimeiroDaLista(lista)); 
-	printf("Rear item is %d\n", UltimoDaLista(lista)); 
+
+	// printf("%d dequeued from lista\n\n", Desenfileira(lista)); 
+	// imprimeLista(lista);
+	
 
 
 }

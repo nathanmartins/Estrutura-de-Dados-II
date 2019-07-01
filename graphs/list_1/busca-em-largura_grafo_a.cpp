@@ -91,6 +91,19 @@ int UltimoDaLista(struct Tipolista* lista)
 		return INT_MIN; 
 	return lista->array[lista->ultimo]; 
 } 
+
+
+void imprimeLista(struct Tipolista* lista) {
+
+	if (listaEstaVazia(lista)){
+		return;
+	} 
+		
+	for(int i = lista->tamanho; i >=0; i--) {
+		printf("%d", lista->array[i]);
+	    // ImprimeVertice(&(lista->array[i]));		
+	}
+}
   
 
 void InicializaPilha (TipoPilha *Pilha) {   
@@ -266,8 +279,10 @@ void BuscaEmLargura(TipoGrafo* Grafo){
 	Enfileira(lista, 30); 
 	Enfileira(lista, 40); 
 
-	printf("%d dequeued from lista\n\n", Desenfileira(lista)); 
+	imprimeLista(lista);
 
+	printf("%d dequeued from lista\n\n", Desenfileira(lista)); 
+	imprimeLista(lista);
 	printf("Front item is %d\n", PrimeiroDaLista(lista)); 
 	printf("Rear item is %d\n", UltimoDaLista(lista)); 
 
